@@ -6,7 +6,7 @@ const dev = process.env.NODE_ENV === 'development';
 
 const config: Configuration = {
   mode: dev ? 'development' : 'production',
-  entry: dev ? './src/index.tsx' : './src/component/index.ts',
+  entry: dev ? './src/index.tsx' : './src/component/index.tsx',
   module: {
     rules: [
       {
