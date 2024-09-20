@@ -24,14 +24,20 @@ const config: Configuration = {
     extensions: [".tsx", ".ts", ".js"],
   },
   output: {
-    filename: "bundle.js",
+    filename: "index.js",
     path: path.resolve(__dirname, "dist"),
   },
   plugins: dev ? [
     new CopyWebpackPlugin({
       patterns: [{ from: "public" }],
     }),
-  ] : [],
+  ] : [
+    new CopyWebpackPlugin({
+      patterns: [
+        { from: "./src/component/index.d.ts", to: "index.d.ts" },
+      ],
+    }),
+  ],
 };
 
 export default config;
