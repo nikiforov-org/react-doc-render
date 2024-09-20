@@ -1,8 +1,8 @@
 export interface DocRenderProps {
     uri: string;
     config?: {
-        loading: React.ComponentType;
-        renderers: {
+        loading?: React.FC;
+        renderers?: {
             [key: string]: Function;
         };
     };
