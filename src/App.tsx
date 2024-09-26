@@ -1,26 +1,37 @@
-import DocRender from "./component/DocRender";
+// App.tsx
+import { DocRender } from "./lib";
+import React from 'react';
 
-const Loading: React.FC = () => {
-  return (
-    <>Загрузка</>
-  )
-}
+const CustomLoading: React.FC = () => {
+    return <>Загрузка...</>;
+};
 
-const myCustomJPGRenderer = () => {
-  console.log('fire myCustomJPGRenderer')
-}
+const CustomNotSupported: React.FC = () => {
+    return <>MIME-type не поддерживается</>;
+};
 
-const config = {
-  loading: Loading,
-  renderers: {
-    'jpg': myCustomJPGRenderer,
-  }
-}
+const myCustomYmlRenderer = async (buffer: ArrayBuffer, setContent: React.Dispatch<React.SetStateAction<string | null>>, extension: string) => {
+    const text = new TextDecoder().decode(buffer);
+    setContent(`Output for my custom '${extension}'-renderer: ${text}`);
+};
 
-export default function App() {
-  return (
-    <main>
-      <DocRender uri="https://raw.githubusercontent.com/sindresorhus/file-type/HEAD/media/logo.jpg" config={config} />
-    </main>
-  );
-}
+const customRenderers = {
+    'yml': myCustomYmlRenderer,
+};
+
+const App = () => {
+    return (
+        <>
+            <DocRender
+                uri="https://upload.wikimedia.org/wikipedia/commons/d/d3/Test.pdf"
+                loading={CustomLoading}
+                notSupported={CustomNotSupported}
+                renderers={customRenderers}
+                className="mx-auto"
+                style={{ position: 'absolute' }}
+            />
+        </>
+    );
+};
+
+export default App;

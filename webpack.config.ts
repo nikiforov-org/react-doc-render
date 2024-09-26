@@ -1,12 +1,11 @@
-import path from "path";
-import { Configuration } from "webpack";
-import CopyWebpackPlugin from "copy-webpack-plugin";
-
+// webpack.config.ts
+const path = require("path");
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 const dev = process.env.NODE_ENV === 'development';
 
-const config: Configuration = {
+module.exports = {
   mode: dev ? 'development' : 'production',
-  entry: dev ? './src/index.tsx' : './src/component/index.tsx',
+  entry: dev ? './src/index.tsx' : './src/lib/index.ts',
   module: {
     rules: [
       {
@@ -15,8 +14,12 @@ const config: Configuration = {
         exclude: /node_modules/,
       },
       {
-        test: /\.css$/,
-        use: ["style-loader", "css-loader"],
+        test: /\.scss$/,
+        use: [
+          "style-loader",
+          "css-loader",
+          "sass-loader"
+        ],
       },
     ],
   },
@@ -26,18 +29,6 @@ const config: Configuration = {
   output: {
     filename: "index.js",
     path: path.resolve(__dirname, "dist"),
+    clean: true,
   },
-  plugins: dev ? [
-    new CopyWebpackPlugin({
-      patterns: [{ from: "public" }],
-    }),
-  ] : [
-    new CopyWebpackPlugin({
-      patterns: [
-        { from: "./src/component/index.d.ts", to: "index.d.ts" },
-      ],
-    }),
-  ],
 };
-
-export default config;

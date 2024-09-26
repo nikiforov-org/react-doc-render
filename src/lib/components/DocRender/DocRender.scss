@@ -1,0 +1,212 @@
+// Main container for Word document content
+.word-content {
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+    color: #333;
+    margin: 20px;
+
+    // Alignment settings
+    text-align: justify;
+    hyphens: auto;
+
+    // General styles for all headings
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        font-weight: bold;
+        color: #2c3e50;
+        margin-bottom: 0.5em;
+    }
+
+    // Heading levels
+    h1 {
+        font-size: 2.5em;
+        margin-top: 0.5em;
+    }
+
+    h2 {
+        font-size: 2em;
+        margin-top: 0.75em;
+    }
+
+    h3 {
+        font-size: 1.75em;
+        margin-top: 1em;
+    }
+
+    h4 {
+        font-size: 1.5em;
+        margin-top: 1.25em;
+    }
+
+    h5 {
+        font-size: 1.25em;
+        margin-top: 1.5em;
+    }
+
+    h6 {
+        font-size: 1em;
+        margin-top: 1.75em;
+    }
+
+    // Paragraphs
+    p {
+        font-size: 1em;
+        margin: 1em 0;
+        text-align: justify;
+    }
+
+    // Bold and italic text styling
+    strong {
+        font-weight: bold;
+        color: #000;
+    }
+
+    em {
+        font-style: italic;
+        color: #555;
+    }
+
+    // Underlined text
+    u {
+        text-decoration: underline;
+    }
+
+    // List styling
+    ul,
+    ol {
+        margin-left: 2em;
+        margin-bottom: 1em;
+    }
+
+    ul li,
+    ol li {
+        margin-bottom: 0.5em;
+    }
+
+    // Unordered list
+    ul {
+        list-style-type: disc;
+    }
+
+    // Ordered list
+    ol {
+        list-style-type: decimal;
+    }
+
+    // Link styling
+    a {
+        color: #3498db;
+        text-decoration: none;
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+
+    // Table styling
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 1.5em 0;
+
+        th,
+        td {
+            padding: 0.75em;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f8f8f8;
+            font-weight: bold;
+        }
+
+        tbody tr:nth-of-type(even) {
+            background-color: #f9f9f9;
+        }
+    }
+
+    // Image styling
+    img {
+        max-width: 100%;
+        height: auto;
+        display: block;
+        margin: 1em auto;
+        border: 1px solid #ddd;
+        padding: 5px;
+        border-radius: 4px;
+    }
+
+    // Blockquote styling
+    blockquote {
+        margin: 1em 0;
+        padding: 0.5em 1.5em;
+        background-color: #f7f7f7;
+        border-left: 5px solid #ccc;
+        font-style: italic;
+    }
+
+    // Code and preformatted text styling
+    code {
+        background-color: #f1f1f1;
+        padding: 0.25em 0.5em;
+        border-radius: 4px;
+        font-family: 'Courier New', monospace;
+    }
+
+    pre {
+        background-color: #f4f4f4;
+        padding: 1em;
+        border-radius: 4px;
+        overflow: auto;
+        font-family: 'Courier New', monospace;
+        font-size: 0.9em;
+        line-height: 1.4;
+    }
+
+    // Horizontal line styling
+    hr {
+        border: 0;
+        border-top: 1px solid #ccc;
+        margin: 2em 0;
+    }
+
+}
+
+// Nested table support
+.word-content table table {
+    margin: 0;
+    border: none;
+
+    th,
+    td {
+        border: none;
+    }
+}
+
+// Multi-level list support
+.word-content ul ul,
+.word-content ol ol {
+    margin-left: 1.5em;
+}
+
+// Subscript and superscript support
+sub,
+sup {
+    font-size: 0.75em;
+    line-height: 1;
+    position: relative;
+    vertical-align: baseline;
+}
+
+sub {
+    bottom: -0.25em;
+}
+
+sup {
+    top: -0.5em;
+}

@@ -1,6 +1,6 @@
 {
   "name": "react-doc-render",
-  "version": "0.1.7",
+  "version": "0.1.10",
   "description": "react-doc-render is a lightweight React library for rendering documents of various popular MIME types directly in the browser. It supports formats such as PDF, images (JPEG, PNG, GIF), text files, and Microsoft Office documents (Word, Excel, PowerPoint), providing a simple and unified interface to handle different content types.",
   "author": "Evgenii Nikiforov <e@nikiforov.org>",
   "license": "MIT",
@@ -19,7 +19,13 @@
   ],
   "scripts": {
     "dev": "NODE_ENV=development webpack serve",
-    "build": "webpack"
+    "build": "webpack && tsc --declaration --declarationDir types --emitDeclarationOnly && rollup -c --bundleConfigAsCjs"
+  },
+  "dependencies": {
+    "canvas-datagrid": "^0.4.7",
+    "mammoth": "^1.8.0",
+    "pdfjs-dist": "^4.6.82",
+    "xlsx": "^0.18.5"
   },
   "peerDependencies": {
     "react": "^18.2.0",
@@ -30,14 +36,16 @@
     "@types/react": "^18.0.26",
     "@types/react-dom": "^18.0.10",
     "@types/webpack": "^5.28.0",
-    "copy-webpack-plugin": "^11.0.0",
-    "css-loader": "^6.7.3",
-    "style-loader": "^3.3.1",
-    "ts-loader": "^9.4.2",
+    "css-loader": "^6.11.0",
+    "rollup-plugin-dts": "^6.1.1",
+    "sass": "^1.79.3",
+    "sass-loader": "^16.0.2",
+    "style-loader": "^3.3.4",
+    "ts-loader": "^9.5.1",
     "ts-node": "^10.9.1",
-    "typescript": "^4.9.4",
-    "webpack": "^5.75.0",
-    "webpack-cli": "^5.0.1",
+    "typescript": "^4.9.5",
+    "webpack": "^5.95.0",
+    "webpack-cli": "^5.1.4",
     "webpack-dev-server": "^4.11.1"
   },
   "files": [
@@ -46,8 +54,5 @@
     "LICENSE"
   ],
   "main": "dist/index.js",
-  "types": "dist/index.d.js",
-  "dependencies": {
-    "file-type": "^19.5.0"
-  }
+  "types": "dist/index.d.js"
 }
