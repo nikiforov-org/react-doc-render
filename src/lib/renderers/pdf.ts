@@ -2,7 +2,7 @@
 import { getDocument, GlobalWorkerOptions } from 'pdfjs-dist';
 
 GlobalWorkerOptions.workerSrc = new URL(
-    'pdfjs-dist/build/pdf.worker.min.mjs',
+    'react-doc-render/dist/utils/pdfWorker.js',
     import.meta.url,
 ).toString();
 
