@@ -1,5 +1,5 @@
 // src/lib/components/DocRender/DocRender.tsx
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { detectMimeType } from '../../utils/detectMimeType';
 import './DocRender.scss';
 import { DefaultLoading, DefaultNotSupported, defaultRenderers } from './DocRender.config';
@@ -24,9 +24,13 @@ const DocRender: React.FC<DocRenderProps> = ({
     const [content, setContent] = useState<string | null>(null);
     const [hasError, setHasError] = useState(false);
     const [isLoading, setIsLoading] = useState(true);
-    const RENDERERS = React.useMemo(() => ({ ...defaultRenderers, ...renderers }), [renderers]);
+    const hasFetched = useRef(false);
+
+    const RENDERERS = { ...defaultRenderers, ...renderers };
 
     useEffect(() => {
+        if (hasFetched.current) return;
+
         const fetchFile = async () => {
             setIsLoading(true);
             try {
@@ -57,6 +61,8 @@ const DocRender: React.FC<DocRenderProps> = ({
                 } else {
                     setHasError(true);
                 }
+
+                hasFetched.current = true;
             } catch (error) {
                 console.error('Error fetching or determining file type:', error);
                 setHasError(true);
@@ -66,7 +72,7 @@ const DocRender: React.FC<DocRenderProps> = ({
         };
 
         fetchFile();
-    }, [uri, RENDERERS]);
+    }, [uri]);
 
     if (isLoading) return <Loading />;
 
