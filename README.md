@@ -8,6 +8,10 @@ To install the library, run the following command:
 ```bash
 npm install react-doc-render
 ```
+Copy PDF-worker to your public directory with `.js` extension:
+```bash
+cp node_modules/pdfjs-dist/build/pdf.worker.min.mjs public/pdf.worker.min.js
+```
 
 ## Usage
 1. Import the Component
