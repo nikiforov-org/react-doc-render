@@ -14,13 +14,13 @@ cp node_modules/pdfjs-dist/build/pdf.worker.min.mjs public/pdf.worker.min.js
 ```
 
 ## Usage
-1. Import the Component
+### 1. Import the Component
 Import `DocRender` from the library:
 ```tsx
 import { DocRender } from 'react-doc-render';
 ```
 
-2. Add the Component to the Render Section
+### 2. Add the Component to the Render Section
 Use the `DocRender` component in your application by passing the document URI:
 ```tsx
 <DocRender uri={uri} />

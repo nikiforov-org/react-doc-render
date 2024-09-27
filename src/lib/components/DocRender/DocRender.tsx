@@ -23,16 +23,12 @@ const DocRender: React.FC<DocRenderProps> = ({
     const [ext, setExt] = useState<string | undefined>();
     const [content, setContent] = useState<string | null>(null);
     const [hasError, setHasError] = useState(false);
-    const [isFetched, setIsFetched] = useState(false);
     const [isLoading, setIsLoading] = useState(true);
     const RENDERERS = React.useMemo(() => ({ ...defaultRenderers, ...renderers }), [renderers]);
 
     useEffect(() => {
         const fetchFile = async () => {
             setIsLoading(true);
-            if (isFetched) return;
-
-            setIsFetched(true);
             try {
                 const response = await fetch(uri);
                 if (!response.ok) {
@@ -70,7 +66,7 @@ const DocRender: React.FC<DocRenderProps> = ({
         };
 
         fetchFile();
-    }, [uri, RENDERERS, isFetched]);
+    }, [uri, RENDERERS]);
 
     if (isLoading) return <Loading />;
 

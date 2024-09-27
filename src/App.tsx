@@ -23,8 +23,8 @@ const App = () => {
     return (
         <>
             <DocRender
-                //uri="./files/xlsx.xlsx"
-                uri="./files/pdf.pdf"
+                uri="./files/xlsx.xlsx"
+                //uri="./files/pdf.pdf"
                 loading={CustomLoading}
                 notSupported={CustomNotSupported}
                 renderers={customRenderers}

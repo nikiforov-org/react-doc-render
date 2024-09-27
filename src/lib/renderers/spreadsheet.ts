@@ -13,7 +13,10 @@ const spreadsheet = async (buffer: ArrayBuffer, setContent: React.Dispatch<React
         });
 
         const container = document.createElement('div');
+
         document.body.appendChild(container);
+
+        setContent(container.innerHTML);
 
         const grid = new CanvasDataGrid({
             parentNode: container,
@@ -22,8 +25,6 @@ const spreadsheet = async (buffer: ArrayBuffer, setContent: React.Dispatch<React
             allowColumnResize: true,
             allowRowResize: true,
         });
-
-        setContent(container.innerHTML);
 
         requestAnimationFrame(() => {
             grid.resize();
