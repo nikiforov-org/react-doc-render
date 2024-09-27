@@ -38,8 +38,15 @@ const DocRender: React.FC<DocRenderProps> = ({
                     throw new Error(`HTTP error! status: ${response.status}`);
                 }
                 const arrayBuffer = await response.arrayBuffer();
-                const fileExtension = await detectMimeType(arrayBuffer);
-                console.log(fileExtension);
+
+                let fileExtension = await detectMimeType(arrayBuffer);
+
+                if (!fileExtension) {
+                    const urlParts = uri.split('.');
+                    fileExtension = urlParts.pop()?.toLowerCase();
+                    console.log('Fallback to extension from filename:', fileExtension);
+                }
+
                 setExt(fileExtension);
 
                 if (fileExtension) {
@@ -72,4 +79,3 @@ const DocRender: React.FC<DocRenderProps> = ({
 };
 
 export default DocRender;
-

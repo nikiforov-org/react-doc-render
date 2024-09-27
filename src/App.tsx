@@ -3,16 +3,16 @@ import { DocRender } from "./lib";
 import React from 'react';
 
 const CustomLoading: React.FC = () => {
-    return <>Загрузка...</>;
+    return <>Loading...</>;
 };
 
 const CustomNotSupported: React.FC = () => {
-    return <>MIME-type не поддерживается</>;
+    return <>Not supported</>;
 };
 
 const myCustomYmlRenderer = async (buffer: ArrayBuffer, setContent: React.Dispatch<React.SetStateAction<string | null>>, extension: string) => {
     const text = new TextDecoder().decode(buffer);
-    setContent(`Output for my custom '${extension}'-renderer: ${text}`);
+    setContent(`<p>Output for my custom '${extension}'-renderer:<p><pre>${text}</pre>`);
 };
 
 const customRenderers = {
@@ -23,7 +23,7 @@ const App = () => {
     return (
         <>
             <DocRender
-                uri="https://upload.wikimedia.org/wikipedia/commons/d/d3/Test.pdf"
+                uri="./docker-compose.yml"
                 loading={CustomLoading}
                 notSupported={CustomNotSupported}
                 renderers={customRenderers}
