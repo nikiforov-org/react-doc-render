@@ -1,7 +1,7 @@
 {
   "name": "react-doc-render",
   "description": "react-doc-render is a lightweight React library for rendering documents of various popular MIME types directly in the browser. It supports formats such as PDF, images (JPEG, PNG, GIF), text files, and Microsoft Office documents (Word, Excel, PowerPoint), providing a simple and unified interface to handle different content types.",
-  "version": "0.1.39",
+  "version": "0.1.40",
   "private": false,
   "author": "Evgenii Nikiforov <e@nikiforov.org>",
   "license": "MIT",
@@ -43,12 +43,11 @@
   },
   "scripts": {
     "dev": "npm run start",
-    "start": "npm run copy-worker && PUBLIC_URL=/ react-scripts start",
+    "start": "PUBLIC_URL=/ react-scripts start",
     "build": "npm run build:dist",
-    "build:dist": "npm run copy-worker && npm run build:types && npm run build:js",
+    "build:dist": "npm run build:types && npm run build:js",
     "build:types": "./node_modules/.bin/tsc --project ./tsconfig.types.json",
-    "build:js": "rm -rf dist && NODE_ENV=production babel src/lib --out-dir dist --copy-files --extensions \".ts,.tsx\" --source-maps false",
-    "copy-worker": "cp node_modules/pdfjs-dist/build/pdf.worker.min.mjs src/lib/utils/pdf.worker.min.js"
+    "build:js": "rm -rf dist && NODE_ENV=production babel src/lib --out-dir dist --copy-files --extensions \".ts,.tsx\" --source-maps false"
   },
   "browserslist": {
     "production": [
@@ -69,20 +68,20 @@
     "xlsx": "^0.18.5"
   },
   "devDependencies": {
-    "@babel/cli": "^7.19.3",
+    "@babel/cli": "^7.25.6",
     "@babel/core": "^7.25.2",
     "@babel/preset-env": "^7.25.4",
-    "@babel/preset-react": "^7.18.6",
-    "@babel/preset-typescript": "^7.18.6",
-    "@types/node": "^16.18.3",
-    "@types/react": "^18.0.24",
-    "@types/react-dom": "^18.0.8",
-    "react-scripts": "5.0.1",
+    "@babel/preset-react": "^7.24.7",
+    "@babel/preset-typescript": "^7.24.7",
+    "@types/node": "^22.7.4",
+    "@types/react": "^18.3.10",
+    "@types/react-dom": "^18.3.0",
+    "react-scripts": "^5.0.1",
     "sass": "^1.79.3",
-    "typescript": "^4.8.4"
+    "typescript": "^4"
   },
   "peerDependencies": {
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
   }
 }

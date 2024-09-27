@@ -1,7 +1,10 @@
 // renderers/pdf.tsx
 import { getDocument, GlobalWorkerOptions } from 'pdfjs-dist';
 
-GlobalWorkerOptions.workerSrc = '../utils/pdf.worker.min.js';
+GlobalWorkerOptions.workerSrc = new URL(
+    'pdfjs-dist/build/pdf.worker.min.mjs',
+    import.meta.url,
+).toString();
 
 const pdf = async (buffer: ArrayBuffer, setContent: React.Dispatch<React.SetStateAction<string | null>>) => {
     try {

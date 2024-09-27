@@ -23,7 +23,8 @@ const App = () => {
     return (
         <>
             <DocRender
-                uri="./files/docker-compose.yml"
+                //uri="./files/xlsx.xlsx"
+                uri="./files/pdf.pdf"
                 loading={CustomLoading}
                 notSupported={CustomNotSupported}
                 renderers={customRenderers}
