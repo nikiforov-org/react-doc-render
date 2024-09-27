@@ -12,7 +12,7 @@ const CustomNotSupported: React.FC = () => {
 
 const myCustomYmlRenderer = async (buffer: ArrayBuffer, setContent: React.Dispatch<React.SetStateAction<string | null>>, extension: string) => {
     const text = new TextDecoder().decode(buffer);
-    setContent(`<p>Output for my custom '${extension}'-renderer:<p><pre>${text}</pre>`);
+    setContent(`<p>Output for my custom ${extension}-renderer:<p><pre>${text}</pre>`);
 };
 
 const customRenderers = {

@@ -1,6 +1,8 @@
 # react-doc-render
 `react-doc-render` is a lightweight React library designed for rendering documents of various popular MIME types directly in the browser. The library supports formats such as PDF, images (JPEG, PNG, GIF), text files, and Microsoft Office documents (Word, Excel), providing a simple and unified interface to handle different content types.
 
+The MIME type detection in the project relies on identifying unique magic numbers—byte sequences at the start of a file. These are compared to known signatures for various formats, such as PDFs, images, or ZIP-based formats like DOCX, XLSX, and PPTX. For ZIP files, internal structure analysis is performed to detect specific formats by checking for format-specific files (e.g., `word/document.xml` for DOCX). If the MIME type cannot be determined through magic numbers, the file extension from the URL is used as a fallback. This ensures robust and accurate detection across multiple file types.
+
 ## Installation
 To install the library, run the following command:
 ```bash
@@ -49,7 +51,7 @@ const CustomNotSupportedComponent: React.FC = () => {
 
 const myCustomYmlRendererFunction = async (buffer: ArrayBuffer, setContent: React.Dispatch<React.SetStateAction<string | null>>, extension: string) => {
     const text = new TextDecoder().decode(buffer);
-    setContent(`<p>Output for my custom '${extension}'-renderer:<p><pre>${text}</pre>`);
+    setContent(`<p>Output for my custom ${extension}-renderer:<p><pre>${text}</pre>`);
 };
 
 const customRenderers = {
