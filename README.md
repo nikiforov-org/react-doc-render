@@ -35,9 +35,7 @@ The `DocRender` component accepts the following configuration options:
 | loading        | `React.FC`             |   no     | `<>Loading...</>`    | A component to display while the document is loading.          |
 | notSupported   | `React.FC`             |   no     | `<>Not supported</>` | A component that is displayed if the document is not supported.|
 | renderers      |  &#x2a; renderers type |   no     | library renderers    | Custom rendering functions for handling specific MIME types.   |
-| ...otherProps  | `any`                  |   no     |    null              | You can pass any additional props that you want.               |
-
-&#x2a; `Record<string, (buffer: ArrayBuffer, setContent: React.Dispatch<React.SetStateAction<string | null>>, extension: string) => Promise<void>>`
+| ...otherProps  | `Renderer`             |   no     |    null              | You can pass any additional props that you want.               |
 
 ## Example of usage
 
