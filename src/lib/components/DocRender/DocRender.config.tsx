@@ -1,5 +1,6 @@
 // components/DocRender/DocRender.config.tsx
 import React from 'react';
+import { Renderer } from '../../types/renderers';
 import word from '../../renderers/word';
 import image from '../../renderers/image';
 import text from '../../renderers/text';
@@ -14,7 +15,7 @@ export const DefaultNotSupported: React.FC = () => {
     return <>Not supported</>;
 };
 
-export const defaultRenderers = {
+export const defaultRenderers: Record<string, Renderer> = {
     // Word
     'doc': word,
     'docx': word,

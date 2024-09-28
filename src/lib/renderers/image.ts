@@ -1,10 +1,12 @@
 // renderers/image.tsx
-const image = async (buffer: ArrayBuffer, setContent: React.Dispatch<React.SetStateAction<string | null>>, extension: string) => {
+import { Content, Renderer } from '../types/renderers';
+
+const image: Renderer = async (buffer, setContent, extension) => {
     const blob = new Blob([buffer], { type: `image/${extension}` });
     const url = URL.createObjectURL(blob);
-
-    const imgHTML = `<img src="${url}" alt="" />`;
-    setContent(imgHTML);
+    const content = `<img src="${url}" alt="" />`;
+    const html = `<div id="rdr-content" class="rdr-content-image">${content}</div>`;
+    setContent({ html });
 };
 
 export default image;

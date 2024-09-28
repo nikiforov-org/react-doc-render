@@ -1,8 +1,9 @@
 // renderers/spreadsheet.tsx
 import * as XLSX from 'xlsx';
 import CanvasDataGrid from 'canvas-datagrid';
+import { Renderer } from '../types/renderers';
 
-const spreadsheet = async (buffer: ArrayBuffer, setContent: React.Dispatch<React.SetStateAction<string | null>>) => {
+const spreadsheet: Renderer = async (buffer, setContent, extension) => {
     try {
         const workbook = XLSX.read(buffer, { type: 'array' });
         const firstSheetName = workbook.SheetNames[0];
@@ -12,22 +13,27 @@ const spreadsheet = async (buffer: ArrayBuffer, setContent: React.Dispatch<React
             defval: '',
         });
 
-        const container = document.createElement('div');
+        setContent({
+            html: `<div id="rdr-content" class="rdr-content-spreadsheet"></div>`,
+            callback: () => {
+                const parentNode = document.getElementById('rdr-content');
 
-        document.body.appendChild(container);
+                if (parentNode) {
+                    const grid = new CanvasDataGrid({
+                        parentNode,
+                        data: data,
+                        editable: false,
+                        allowColumnResize: true,
+                        allowRowResize: true,
+                    });
 
-        setContent(container.innerHTML);
-
-        const grid = new CanvasDataGrid({
-            parentNode: container,
-            data: data,
-            editable: false,
-            allowColumnResize: true,
-            allowRowResize: true,
-        });
-
-        requestAnimationFrame(() => {
-            grid.resize();
+                    requestAnimationFrame(() => {
+                        grid.resize();
+                    });
+                } else {
+                    console.error('Element with id "rdr-content" not found.');
+                }
+            }
         });
 
     } catch (error) {

@@ -1,2 +1,3 @@
-declare const word: (buffer: ArrayBuffer, setContent: React.Dispatch<React.SetStateAction<string | null>>) => Promise<void>;
+import { Renderer } from '../types/renderers';
+declare const word: Renderer;
 export default word;

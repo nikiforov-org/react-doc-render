@@ -2,6 +2,11 @@
 import { DocRender } from "./lib";
 import React from 'react';
 
+interface Content {
+    html: string;
+    callback?: () => void;
+}
+
 const CustomLoading: React.FC = () => {
     return <>Loading...</>;
 };
@@ -10,9 +15,10 @@ const CustomNotSupported: React.FC = () => {
     return <>Not supported</>;
 };
 
-const myCustomYmlRenderer = async (buffer: ArrayBuffer, setContent: React.Dispatch<React.SetStateAction<string | null>>, extension: string) => {
+const myCustomYmlRenderer = async (buffer: ArrayBuffer, setContent: React.Dispatch<React.SetStateAction<Content | null>>, extension: string) => {
     const text = new TextDecoder().decode(buffer);
-    setContent(`<p>Output for my custom ${extension}-renderer:</p><pre>${text}</pre>`);
+    const html = `<p>Output for my custom ${extension}-renderer:</p><pre>${text}</pre>`
+    setContent({ html });
 };
 
 const customRenderers = {

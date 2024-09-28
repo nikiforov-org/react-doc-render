@@ -3,13 +3,14 @@ import React, { useEffect, useState, useRef } from 'react';
 import { detectMimeType } from '../../utils/detectMimeType';
 import './DocRender.scss';
 import { DefaultLoading, DefaultNotSupported, defaultRenderers } from './DocRender.config';
+import { Content, Renderer } from '../../types/renderers';
 
 export interface DocRenderProps extends React.HTMLAttributes<HTMLDivElement> {
     uri: string;
     loading?: React.FC;
     notSupported?: React.FC;
     renderers?: {
-        [key: string]: (buffer: ArrayBuffer, setContent: React.Dispatch<React.SetStateAction<string | null>>, extension: string) => Promise<void>;
+        [key: string]: Renderer;
     };
 }
 
@@ -21,7 +22,7 @@ const DocRender: React.FC<DocRenderProps> = ({
     ...props
 }) => {
     const [ext, setExt] = useState<string | undefined>();
-    const [content, setContent] = useState<string | null>(null);
+    const [content, setContent] = useState<Content | null>(null);
     const [hasError, setHasError] = useState(false);
     const [isLoading, setIsLoading] = useState(true);
     const hasFetched = useRef(false);
@@ -74,11 +75,17 @@ const DocRender: React.FC<DocRenderProps> = ({
         fetchFile();
     }, [uri]);
 
+    useEffect(() => {
+        if (content?.callback) {
+            content.callback();
+        }
+    }, [content]);
+
     if (isLoading) return <Loading />;
 
     if (hasError) return <NotSupported />;
 
-    if (content) return <div {...props} dangerouslySetInnerHTML={{ __html: content }} />;
+    if (content) return <div {...props} dangerouslySetInnerHTML={{ __html: content.html }} />;
 
     return null;
 };

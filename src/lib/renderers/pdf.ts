@@ -1,5 +1,6 @@
 // renderers/pdf.tsx
 import { getDocument, GlobalWorkerOptions } from 'pdfjs-dist';
+import { Renderer } from '../types/renderers';
 
 // GlobalWorkerOptions.workerSrc = new URL(
 //     'pdfjs-dist/build/pdf.worker.min.mjs',
@@ -7,7 +8,7 @@ import { getDocument, GlobalWorkerOptions } from 'pdfjs-dist';
 // ).toString();
 GlobalWorkerOptions.workerSrc = './pdf.worker.min.js'
 
-const pdf = async (buffer: ArrayBuffer, setContent: React.Dispatch<React.SetStateAction<string | null>>) => {
+const pdf: Renderer = async (buffer, setContent, extension) => {
     try {
         const pdf = await getDocument({ data: buffer }).promise;
         const numPages = pdf.numPages;
@@ -28,8 +29,9 @@ const pdf = async (buffer: ArrayBuffer, setContent: React.Dispatch<React.SetStat
             }
         }
 
-        const imgTags = images.map((src) => `<img src="${src}" alt="PDF Page" />`).join('');
-        setContent(imgTags);
+        const content = images.map((src) => `<img src="${src}" alt="PDF Page" />`).join('');
+        const html = `<div id="rdr-content" class="rdr-content-pdf">${content}</div>`;
+        setContent({ html });
     } catch (error) {
         console.error('Error rendering PDF:', error);
         setContent(null);
