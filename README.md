@@ -53,9 +53,12 @@ const CustomNotSupportedComponent: React.FC = () => {
     return <>Custom `Not supported`</>;
 };
 
-const myCustomYmlRendererFunction = async (buffer: ArrayBuffer, setContent: React.Dispatch<React.SetStateAction<string | null>>, extension: string) => {
+const myCustomYmlRenderer: Renderer = async (buffer, setContent, extension) => {
     const text = new TextDecoder().decode(buffer);
-    setContent(`<p>Output for my custom ${extension}-renderer:</p><pre>${text}</pre>`);
+    const content = `<p>Output from my custom ${extension}-renderer:</p><pre>${text}</pre>`;
+    const html = `<div id="rdr-content" class="rdr-content-customRenderer">${content}</div>`;
+    const callback = () => console.log(`${extension}-file was successfully rendered`);
+    setContent({ html, callback });
 };
 
 const customRenderers = {

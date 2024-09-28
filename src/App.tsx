@@ -1,11 +1,7 @@
 // App.tsx
 import { DocRender } from "./lib";
 import React from 'react';
-
-interface Content {
-    html: string;
-    callback?: () => void;
-}
+import { Renderer } from "./lib/types/renderers";
 
 const CustomLoading: React.FC = () => {
     return <>Loading...</>;
@@ -15,10 +11,12 @@ const CustomNotSupported: React.FC = () => {
     return <>Not supported</>;
 };
 
-const myCustomYmlRenderer = async (buffer: ArrayBuffer, setContent: React.Dispatch<React.SetStateAction<Content | null>>, extension: string) => {
+const myCustomYmlRenderer: Renderer = async (buffer, setContent, extension) => {
     const text = new TextDecoder().decode(buffer);
-    const html = `<p>Output for my custom ${extension}-renderer:</p><pre>${text}</pre>`
-    setContent({ html });
+    const content = `<p>Output from my custom ${extension}-renderer:</p><pre>${text}</pre>`;
+    const html = `<div id="rdr-content" class="rdr-content-customRenderer">${content}</div>`;
+    const callback = () => console.log(`${extension}-file was successfully rendered`);
+    setContent({ html, callback });
 };
 
 const customRenderers = {
