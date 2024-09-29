@@ -34,8 +34,8 @@ The `DocRender` component accepts the following configuration options:
 | uri            | `string`               |   yes    |    null              | The URI of the document to render.                             |
 | loading        | `React.FC`             |   no     | `<>Loading...</>`    | A component to display while the document is loading.          |
 | notSupported   | `React.FC`             |   no     | `<>Not supported</>` | A component that is displayed if the document is not supported.|
-| renderers      |  &#x2a; renderers type |   no     | library renderers    | Custom rendering functions for handling specific MIME types.   |
-| ...otherProps  | `Renderer`             |   no     |    null              | You can pass any additional props that you want.               |
+| renderers      | `Renderers`            |   no     | library renderers    | Custom rendering functions for handling specific MIME types.   |
+| ...otherProps  | `any`                  |   no     |    null              | You can pass any additional props that you want.               |
 
 ## Example of usage
 
