@@ -1,8 +1,8 @@
 // renderers/word.tsx
 import mammoth from 'mammoth';
-import { Renderer } from '../types/renderers';
+import { RendererFunction } from '../types';
 
-const word: Renderer = async (buffer, setContent, extension) => {
+const word: RendererFunction = async (buffer, setContent, mimeType) => {
     try {
         const result = await mammoth.convertToHtml({ arrayBuffer: buffer });
         const html = `<div id="rdr-content" class="rdr-content-word">${result.value}</div>`;

@@ -1,0 +1,38 @@
+{
+    "en": {
+        "error_fetching_the_file": "Error fetching the file",
+        "unsupported_file_format": "Unsupported file format",
+        "unable_to_detect_the_files_mime_type": "Unable to detect the file's MIME type",
+        "file_size_exceeds_the_limit": "File size exceeds the limit"
+    },
+    "ru": {
+        "error_fetching_the_file": "Ошибка при загрузке файла",
+        "unsupported_file_format": "Неподдерживаемый формат файла",
+        "unable_to_detect_the_files_mime_type": "Не удалось определить MIME-тип файла",
+        "file_size_exceeds_the_limit": "Размер файла превышает лимит"
+    },
+    "es": {
+        "error_fetching_the_file": "Error al recuperar el archivo",
+        "unsupported_file_format": "Formato de archivo no compatible",
+        "unable_to_detect_the_files_mime_type": "No se pudo detectar el tipo MIME del archivo",
+        "file_size_exceeds_the_limit": "El tamaño del archivo excede el límite"
+    },
+    "zh": {
+        "error_fetching_the_file": "获取文件时出错",
+        "unsupported_file_format": "不支持的文件格式",
+        "unable_to_detect_the_files_mime_type": "无法检测文件的 MIME 类型",
+        "file_size_exceeds_the_limit": "文件大小超过限制"
+    },
+    "ar": {
+        "error_fetching_the_file": "خطأ في جلب الملف",
+        "unsupported_file_format": "تنسيق الملف غير مدعوم",
+        "unable_to_detect_the_files_mime_type": "تعذر اكتشاف نوع MIME للملف",
+        "file_size_exceeds_the_limit": "حجم الملف يتجاوز الحد المسموح به"
+    },
+    "fr": {
+        "error_fetching_the_file": "Erreur lors de la récupération du fichier",
+        "unsupported_file_format": "Format de fichier non pris en charge",
+        "unable_to_detect_the_files_mime_type": "Impossible de détecter le type MIME du fichier",
+        "file_size_exceeds_the_limit": "La taille du fichier dépasse la limite"
+    }
+}

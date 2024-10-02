@@ -1,9 +1,9 @@
 // renderers/spreadsheet.tsx
 import * as XLSX from 'xlsx';
 import CanvasDataGrid from 'canvas-datagrid';
-import { Renderer } from '../types/renderers';
+import { RendererFunction } from '../types';
 
-const spreadsheet: Renderer = async (buffer, setContent, extension) => {
+const spreadsheet: RendererFunction = async (buffer, setContent, mimeType) => {
     try {
         const workbook = XLSX.read(buffer, { type: 'array' });
         const firstSheetName = workbook.SheetNames[0];

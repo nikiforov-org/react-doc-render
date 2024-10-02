@@ -175,38 +175,82 @@
         margin: 2em 0;
     }
 
-}
+    // Subscript and superscript support
+    sub,
+    sup {
+        font-size: 0.75em;
+        line-height: 1;
+        position: relative;
+        vertical-align: baseline;
+    }
 
-// Nested table support
-.word-content table table {
-    margin: 0;
-    border: none;
+    sub {
+        bottom: -0.25em;
+    }
 
-    th,
-    td {
+    sup {
+        top: -0.5em;
+    }
+
+    // Nested table support
+    table table {
+        margin: 0;
         border: none;
+
+        th,
+        td {
+            border: none;
+        }
+    }
+
+    // Multi-level list support
+    ul ul,
+    ol ol {
+        margin-left: 1.5em;
     }
 }
 
-// Multi-level list support
-.word-content ul ul,
-.word-content ol ol {
-    margin-left: 1.5em;
-}
+// Main container for Zip document content
+.rdr-content-zip {
 
-// Subscript and superscript support
-sub,
-sup {
-    font-size: 0.75em;
-    line-height: 1;
-    position: relative;
-    vertical-align: baseline;
-}
+    .folder {
+        .folder {
+            margin: 0 0 0 24px;
+        }
 
-sub {
-    bottom: -0.25em;
-}
+        input {
+            display: none;
+        }
 
-sup {
-    top: -0.5em;
+        label {
+            cursor: pointer;
+        }
+
+        input+label+div {
+            display: none;
+        }
+
+        input+label:before {
+            content: '📁';
+            margin: 0 4px 0 0;
+        }
+
+        input:checked+label+div {
+            display: block;
+        }
+
+        input:checked+label:before {
+            content: '📂';
+            margin: 0 4px 0 0;
+        }
+    }
+
+    .file {
+        margin: 0 0 0 24px;
+    }
+
+    .file:before {
+        content: '📄';
+        margin: 0 4px 0 0;
+    }
 }

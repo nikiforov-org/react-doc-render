@@ -1,14 +1,10 @@
 // renderers/pdf.tsx
 import { getDocument, GlobalWorkerOptions } from 'pdfjs-dist';
-import { Renderer } from '../types/renderers';
+import { RendererFunction } from '../types';
 
-// GlobalWorkerOptions.workerSrc = new URL(
-//     'pdfjs-dist/build/pdf.worker.min.mjs',
-//     import.meta.url,
-// ).toString();
-GlobalWorkerOptions.workerSrc = './pdf.worker.min.js'
+GlobalWorkerOptions.workerSrc = '/pdf.worker.min.js'
 
-const pdf: Renderer = async (buffer, setContent, extension) => {
+const pdf: RendererFunction = async (buffer, setContent, mimeType) => {
     try {
         const pdf = await getDocument({ data: buffer }).promise;
         const numPages = pdf.numPages;

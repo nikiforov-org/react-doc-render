@@ -1,7 +1,7 @@
 {
   "name": "react-doc-render",
   "description": "react-doc-render is a lightweight React library for rendering documents of various popular MIME types directly in the browser. It supports formats such as PDF, images (JPEG, PNG, GIF), text files, and Microsoft Office documents (Word, Excel, PowerPoint), providing a simple and unified interface to handle different content types.",
-  "version": "0.1.47",
+  "version": "0.1.48",
   "private": false,
   "author": "Evgenii Nikiforov <e@nikiforov.org>",
   "license": "MIT",
@@ -66,6 +66,7 @@
     "canvas-datagrid": "^0.4.7",
     "mammoth": "^1.8.0",
     "pdfjs-dist": "^4.6.82",
+    "tiff": "^6.1.1",
     "xlsx": "^0.18.5"
   },
   "devDependencies": {

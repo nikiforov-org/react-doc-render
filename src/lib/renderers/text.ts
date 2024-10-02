@@ -1,7 +1,7 @@
 // renderers/text.tsx
-import { Renderer } from '../types/renderers';
+import { RendererFunction } from '../types';
 
-const text: Renderer = async (buffer, setContent, extension) => {
+const text: RendererFunction = async (buffer, setContent, mimeType) => {
     const decoder = new TextDecoder('utf-8');
     const textContent = decoder.decode(buffer);
     const content = `<pre>${textContent}</pre>`

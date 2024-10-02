@@ -1,3 +1,3 @@
-import { Renderer } from '../types/renderers';
-declare const word: Renderer;
+import { RendererFunction } from '../types';
+declare const word: RendererFunction;
 export default word;

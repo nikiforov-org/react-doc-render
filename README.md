@@ -1,7 +1,48 @@
 # react-doc-render
-`react-doc-render` is a lightweight React library designed for rendering documents of various popular MIME types directly in the browser. The library supports formats such as PDF, images (JPEG, PNG, GIF), text files, and Microsoft Office documents (Word, Excel), providing a simple and unified interface to handle different content types.
+`react-doc-render` is a lightweight React library designed for rendering documents of various popular MIME types directly in the browser. The library supports formats such as PDF, images (JPEG, PNG, GIF, SVG, BMP, TIFF), text files (plain text, HTML, XML, CSV, JSON), Microsoft Office documents (Word, Excel), audio files (MP3, WAV, OGG, AAC), video files (MP4, WebM, OGG, AVI, QuickTime, MPEG, WMV), and ZIP archives. It provides a simple and unified interface to handle different content types.
 
-The MIME type detection in the project relies on identifying unique magic numbers—byte sequences at the start of a file. These are compared to known signatures for various formats, such as PDFs, images, or ZIP-based formats like DOCX, XLSX, and PPTX. For ZIP files, internal structure analysis is performed to detect specific formats by checking for format-specific files (e.g., `word/document.xml` for DOCX). If the MIME type cannot be determined through magic numbers, the file extension from the URL is used as a fallback. This ensures robust and accurate detection across multiple file types.
+## Supported MIME types
+| MIME type                                                                                      | Passed |
+|------------------------------------------------------------------------------------------------|--------|
+| application/msword                                                                             | ❓     |
+| application/vnd.openxmlformats-officedocument.wordprocessingml.document                        | ✅     |
+| application/vnd.oasis.opendocument.text                                                        | ❓     |
+| image/apng                                                                                     | ❓     |
+| image/png                                                                                      | ✅     |
+| image/jpeg                                                                                     | ✅     |
+| image/gif                                                                                      | ❓     |
+| image/bmp                                                                                      | ❓     |
+| image/svg+xml                                                                                  | ✅     |
+| image/tif                                                                                      | ✅     |
+| image/tiff                                                                                     | ✅     |
+| text/plain                                                                                     | ✅     |
+| application/xml                                                                                | ✅     |
+| application/json                                                                               | ✅     |
+| text/csv                                                                                       | ✅     |
+| text/html                                                                                      | ✅     |
+| application/pdf                                                                                | ✅     |
+| application/vnd.ms-excel                                                                       | ❓     |
+| application/vnd.openxmlformats-officedocument.spreadsheetml.sheet                              | ✅     |
+| application/vnd.oasis.opendocument.spreadsheet                                                 | ❓     |
+| application/vnd.oasis.opendocument.spreadsheet-template                                        | ❓     |
+| application/zip                                                                                | ✅     |
+| application/x-zip-compressed                                                                   | ✅     |
+| video/mp4                                                                                      | ❓     |
+| video/webm                                                                                     | ❓     |
+| video/ogg                                                                                      | ❓     |
+| video/x-msvideo                                                                                | ❓     |
+| video/quicktime                                                                                | ❓     |
+| video/mpeg                                                                                     | ❓     |
+| video/x-ms-wmv                                                                                 | ❓     |
+| audio/mpeg                                                                                     | ❓     |
+| audio/wav                                                                                      | ❓     |
+| audio/ogg                                                                                      | ❓     |
+| audio/mp4                                                                                      | ❓     |
+| audio/aac                                                                                      | ❓     |
+| audio/x-wav                                                                                    | ❓     |
+
+
+MIME types are obtained through a separate request for the `Content-Type` header. You can pass the MIME type and file size directly to reduce the number of requests. This approach streamlines the process and enhances efficiency when handling various file types within the library.
 
 ## Installation
 To install the library, run the following command:
@@ -29,13 +70,16 @@ Use the `DocRender` component in your application by passing the document URI:
 ## Configuration
 The `DocRender` component accepts the following configuration options:
 
-| Parameter      | Type                   | Required | Default              |  Description                                                   |
-|----------------|------------------------|----------|----------------------|----------------------------------------------------------------|
-| uri            | `string`               |   yes    |    null              | The URI of the document to render.                             |
-| loading        | `React.FC`             |   no     | `<>Loading...</>`    | A component to display while the document is loading.          |
-| notSupported   | `React.FC`             |   no     | `<>Not supported</>` | A component that is displayed if the document is not supported.|
-| renderers      | `Renderers`            |   no     | library renderers    | Custom rendering functions for handling specific MIME types.   |
-| ...otherProps  | `any`                  |   no     |    null              | You can pass any additional props that you want.               |
+| Parameter      | Type                      | Required | Default                                                               |  Description                                                   |
+|----------------|---------------------------|----------|-----------------------------------------------------------------------|-----------------------------------------|
+| uri            | `string`                  |   yes    |    `null`                                                               | The URI of the document to render.                             |
+| loading        | `React.FC`                |   no     | `<>Loading...</>`                                                     | A component to display while the document is loading.          |
+| message        | `MessageFunction`         |   no     | `<MessageComponent text={text} type={type} />`                        | Returns a service message, e.g., firing a toast or rendering a component.|
+| renderers      | `RendererFunction`        |   no     | library renderers                                                     | Custom rendering functions for handling specific MIME types.   |
+| mime           | `string`                  |   no     |    `null`                                                               | To specify the MIME type directly.                             |
+| size           | `number`                  |   no     |    `null`                                                               | To specify the file size directly.                             |
+| limit          | `{[key: string]: number}` |   no     | `{"application/zip": 1048576, "application/x-zip-compressed": 1048576}` | Limit for rendering the file MIME type in bytes.           |
+| ...otherProps  | `any`                     |   no     |    `null`                                       | You can pass any additional props that you want.               |
 
 ## Example of usage
 
@@ -43,19 +87,24 @@ The `DocRender` component accepts the following configuration options:
 import React from 'react';
 import { DocRender } from "react-doc-render";
 
+const limit = {
+    "application/zip": 5242880,
+    "application/x-zip-compressed": 5242880
+}
+
 const CustomLoadingComponent: React.FC = () => {
     return <>Custom loading...</>;
 };
 
-const CustomNotSupportedComponent: React.FC = () => {
-    return <>Custom `Not supported`</>;
+const customMessage: MessageFunction = (text, type) => {
+    console.log(`${type}: ${text}`);
 };
 
-const myCustomYmlRenderer: Renderer = async (buffer, setContent, extension) => {
+const myCustomYmlRenderer: RendererFunction = async (buffer, setContent, mimeType) => {
     const text = new TextDecoder().decode(buffer);
-    const content = `<p>Output from my custom ${extension}-renderer:</p><pre>${text}</pre>`;
+    const content = `<p>Output from my custom ${mimeType}-renderer:</p><pre>${text}</pre>`;
     const html = `<div id="rdr-content" class="rdr-content-customRenderer">${content}</div>`;
-    const callback = () => console.log(`${extension}-file was successfully rendered`);
+    const callback = () => console.log(`${mimeType}-file was successfully rendered`);
     setContent({ html, callback });
 };
 
@@ -69,8 +118,9 @@ const App = () => {
             <DocRender
                 uri="./docker-compose.yml"
                 loading={CustomLoadingComponent}
-                notSupported={CustomNotSupportedComponent}
+                message={customMessage}
                 renderers={customRenderers}
+                limit={limit}
                 className="mx-auto"
                 style={{ position: 'absolute' }}
             />

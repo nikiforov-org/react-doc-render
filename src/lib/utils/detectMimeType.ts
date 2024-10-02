@@ -1,5 +1,5 @@
 import JSZip from 'jszip';
-import magicNumbers from './magicNumbers.json';
+import magicNumbers from '../data/magicNumbers.json';
 
 const getMagicNumber = async (arrayBuffer: ArrayBuffer, length: number = 8): Promise<string> => {
     const bytes = new Uint8Array(arrayBuffer, 0, length);

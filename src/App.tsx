@@ -1,21 +1,21 @@
 // App.tsx
 import { DocRender } from "./lib";
 import React from 'react';
-import { Renderer } from "./lib/types/renderers";
+import { MessageFunction, RendererFunction } from "./lib/types";
 
 const CustomLoading: React.FC = () => {
     return <>Loading...</>;
 };
 
-const CustomNotSupported: React.FC = () => {
-    return <>Not supported</>;
+const customMessage: MessageFunction = (text, type) => {
+    console.log(`${type}: ${text}`);
 };
 
-const myCustomYmlRenderer: Renderer = async (buffer, setContent, extension) => {
+const myCustomYmlRenderer: RendererFunction = async (buffer, setContent, mimeType) => {
     const text = new TextDecoder().decode(buffer);
-    const content = `<p>Output from my custom ${extension}-renderer:</p><pre>${text}</pre>`;
+    const content = `<p>Output from my custom ${mimeType}-renderer:</p><pre>${text}</pre>`;
     const html = `<div id="rdr-content" class="rdr-content-customRenderer">${content}</div>`;
-    const callback = () => console.log(`${extension}-file was successfully rendered`);
+    const callback = () => console.log(`${mimeType}-file was successfully rendered`);
     setContent({ html, callback });
 };
 
@@ -23,15 +23,26 @@ const customRenderers = {
     'yml': myCustomYmlRenderer,
 };
 
+const limit = {
+    "application/zip": 5242880,
+    "application/x-zip-compressed": 5242880
+}
+
 const App = () => {
     return (
         <>
             <DocRender
-                uri="./files/xlsx.xlsx"
-                //uri="./files/pdf.pdf"
+                //uri="./files/xlsx.xlsx"
+                uri="./files/zip.zip"
+                //uri="./files/html.html"
+                //uri="./files/csv.csv"
+                //uri="./files/xml.xml"
                 loading={CustomLoading}
-                notSupported={CustomNotSupported}
-                renderers={customRenderers}
+                //message={customMessage}
+                //mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+                //size={456}
+                //renderers={customRenderers}
+                limit={limit}
                 className="mx-auto"
                 style={{ position: 'absolute' }}
             />
