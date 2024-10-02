@@ -49,6 +49,7 @@ export const defaultRenderers: Record<string, RendererFunction> = {
     // Text
     'text/plain': text,
     'application/xml': xml,
+    'text/xml': xml,
     'application/json': text,
     'text/csv': text,
     'text/html': html,

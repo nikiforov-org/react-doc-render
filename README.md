@@ -11,12 +11,13 @@
 | image/png                                                                                      | ✅     |
 | image/jpeg                                                                                     | ✅     |
 | image/gif                                                                                      | ❓     |
-| image/bmp                                                                                      | ❓     |
+| image/bmp                                                                                      | ✅     |
 | image/svg+xml                                                                                  | ✅     |
 | image/tif                                                                                      | ✅     |
 | image/tiff                                                                                     | ✅     |
 | text/plain                                                                                     | ✅     |
 | application/xml                                                                                | ✅     |
+| text/xml                                                                                       | ✅     |
 | application/json                                                                               | ✅     |
 | text/csv                                                                                       | ✅     |
 | text/html                                                                                      | ✅     |
@@ -75,10 +76,12 @@ The `DocRender` component accepts the following configuration options:
 | uri            | `string`                  |   yes    |    `null`                                                               | The URI of the document to render.                             |
 | loading        | `React.FC`                |   no     | `<>Loading...</>`                                                     | A component to display while the document is loading.          |
 | message        | `MessageFunction`         |   no     | `<MessageComponent text={text} type={type} />`                        | Returns a service message, e.g., firing a toast or rendering a component.|
-| renderers      | `RendererFunction`        |   no     | library renderers                                                     | Custom rendering functions for handling specific MIME types.   |
+| renderers      | `RendererFunction`        |   no     | Library renderers                                                     | Custom rendering functions for handling specific MIME types.   |
 | mime           | `string`                  |   no     |    `null`                                                               | To specify the MIME type directly.                             |
 | size           | `number`                  |   no     |    `null`                                                               | To specify the file size directly.                             |
 | limit          | `{[key: string]: number}` |   no     | `{"application/zip": 1048576, "application/x-zip-compressed": 1048576}` | Limit for rendering the file MIME type in bytes.           |
+| i18n           | `[languageCode: string]: {[key: string]: string;}`|   no     |    Translated messages                                                               | Translated service messages.                             |
+| lang           | `en \| ru \| es \| zh \| ar \| fr`|   no     |    `'en'`                                                               | Language of service messages.                             |
 | ...otherProps  | `any`                     |   no     |    `null`                                       | You can pass any additional props that you want.               |
 
 ## Example of usage
@@ -91,6 +94,15 @@ const limit = {
     "application/zip": 5242880,
     "application/x-zip-compressed": 5242880
 }
+
+const i18n = {
+    "de": {
+        "error_fetching_the_file": "Fehler beim Abrufen der Datei",
+        "unsupported_file_format": "Nicht unterstütztes Dateiformat",
+        "unable_to_detect_the_files_mime_type": "Kann den MIME-Typ der Datei nicht erkennen",
+        "file_size_exceeds_the_limit": "Dateigröße überschreitet das Limit"
+    }
+};
 
 const CustomLoadingComponent: React.FC = () => {
     return <>Custom loading...</>;
@@ -121,6 +133,8 @@ const App = () => {
                 message={customMessage}
                 renderers={customRenderers}
                 limit={limit}
+                lang="ge"
+                i18n={i18n}
                 className="mx-auto"
                 style={{ position: 'absolute' }}
             />

@@ -28,6 +28,15 @@ const limit = {
     "application/x-zip-compressed": 5242880
 }
 
+const i18n = {
+    "de": {
+        "error_fetching_the_file": "Fehler beim Abrufen der Datei",
+        "unsupported_file_format": "Nicht unterstütztes Dateiformat",
+        "unable_to_detect_the_files_mime_type": "Kann den MIME-Typ der Datei nicht erkennen",
+        "file_size_exceeds_the_limit": "Dateigröße überschreitet das Limit"
+    }
+};
+
 const App = () => {
     return (
         <>
@@ -44,6 +53,8 @@ const App = () => {
                 //renderers={customRenderers}
                 limit={limit}
                 className="mx-auto"
+                lang="de"
+                i18n={i18n}
                 style={{ position: 'absolute' }}
             />
         </>
