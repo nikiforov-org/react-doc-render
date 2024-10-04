@@ -4,13 +4,11 @@
 ## Supported MIME types
 | MIME type                                                                                      | Passed |
 |------------------------------------------------------------------------------------------------|--------|
-| application/msword                                                                             | ❓     |
 | application/vnd.openxmlformats-officedocument.wordprocessingml.document                        | ✅     |
-| application/vnd.oasis.opendocument.text                                                        | ❓     |
-| image/apng                                                                                     | ❓     |
+| image/apng                                                                                     | ✅     |
 | image/png                                                                                      | ✅     |
 | image/jpeg                                                                                     | ✅     |
-| image/gif                                                                                      | ❓     |
+| image/gif                                                                                      | ✅     |
 | image/bmp                                                                                      | ✅     |
 | image/svg+xml                                                                                  | ✅     |
 | image/tif                                                                                      | ✅     |
@@ -22,25 +20,24 @@
 | text/csv                                                                                       | ✅     |
 | text/html                                                                                      | ✅     |
 | application/pdf                                                                                | ✅     |
-| application/vnd.ms-excel                                                                       | ❓     |
+| application/vnd.ms-excel                                                                       | ✅     |
 | application/vnd.openxmlformats-officedocument.spreadsheetml.sheet                              | ✅     |
-| application/vnd.oasis.opendocument.spreadsheet                                                 | ❓     |
-| application/vnd.oasis.opendocument.spreadsheet-template                                        | ❓     |
+| application/vnd.oasis.opendocument.spreadsheet                                                 | ✅     |
 | application/zip                                                                                | ✅     |
 | application/x-zip-compressed                                                                   | ✅     |
-| video/mp4                                                                                      | ❓     |
-| video/webm                                                                                     | ❓     |
-| video/ogg                                                                                      | ❓     |
-| video/x-msvideo                                                                                | ❓     |
-| video/quicktime                                                                                | ❓     |
-| video/mpeg                                                                                     | ❓     |
-| video/x-ms-wmv                                                                                 | ❓     |
-| audio/mpeg                                                                                     | ❓     |
-| audio/wav                                                                                      | ❓     |
-| audio/ogg                                                                                      | ❓     |
-| audio/mp4                                                                                      | ❓     |
-| audio/aac                                                                                      | ❓     |
-| audio/x-wav                                                                                    | ❓     |
+| video/mp4                                                                                      | ✅     |
+| video/webm                                                                                     | ✅     |
+| video/ogg                                                                                      | ✅     |
+| video/x-msvideo                                                                                | ✅     |
+| video/quicktime                                                                                | ✅     |
+| video/mpeg                                                                                     | ✅     |
+| video/x-ms-wmv                                                                                 | ✅     |
+| audio/mpeg                                                                                     | ✅     |
+| audio/wav                                                                                      | ✅     |
+| audio/ogg                                                                                      | ✅     |
+| audio/mp4                                                                                      | ✅     |
+| audio/aac                                                                                      | ✅     |
+| audio/x-wav                                                                                    | ✅     |
 
 
 MIME types are obtained through a separate request for the `Content-Type` header. You can pass the MIME type and file size directly to reduce the number of requests. This approach streamlines the process and enhances efficiency when handling various file types within the library.

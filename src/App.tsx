@@ -41,21 +41,22 @@ const App = () => {
     return (
         <>
             <DocRender
-                //uri="./files/xlsx.xlsx"
-                uri="./files/zip.zip"
-                //uri="./files/html.html"
-                //uri="./files/csv.csv"
-                //uri="./files/xml.xml"
-                loading={CustomLoading}
-                //message={customMessage}
-                //mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
-                //size={456}
-                //renderers={customRenderers}
-                limit={limit}
-                className="mx-auto"
-                lang="de"
-                i18n={i18n}
-                style={{ position: 'absolute' }}
+                uri="./files/mov.mov"
+            //uri="./files/xlsx.xlsx"
+            //uri="./files/zip.zip"
+            //uri="./files/html.html"
+            //uri="./files/csv.csv"
+            //uri="./files/xml.xml"
+            //loading={CustomLoading}
+            //message={customMessage}
+            //mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+            //size={456}
+            //renderers={customRenderers}
+            //limit={limit}
+            //className="mx-auto"
+            //lang="de"
+            //i18n={i18n}
+            //style={{ position: 'absolute' }}
             />
         </>
     );

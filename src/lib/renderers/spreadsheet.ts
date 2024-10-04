@@ -1,14 +1,14 @@
 // renderers/spreadsheet.tsx
-import * as XLSX from 'xlsx';
+import { read, utils } from 'xlsx';
 import CanvasDataGrid from 'canvas-datagrid';
 import { RendererFunction } from '../types';
 
 const spreadsheet: RendererFunction = async (buffer, setContent, mimeType) => {
     try {
-        const workbook = XLSX.read(buffer, { type: 'array' });
+        const workbook = read(buffer, { type: 'array' });
         const firstSheetName = workbook.SheetNames[0];
         const worksheet = workbook.Sheets[firstSheetName];
-        const data = XLSX.utils.sheet_to_json(worksheet, {
+        const data = utils.sheet_to_json(worksheet, {
             header: 1,
             defval: '',
         });

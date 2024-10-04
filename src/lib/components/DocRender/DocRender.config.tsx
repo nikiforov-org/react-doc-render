@@ -34,9 +34,7 @@ export const defaultMessage: MessageFunction = (text, type) => {
 
 export const defaultRenderers: Record<string, RendererFunction> = {
     // Word
-    'application/msword': word,
     'application/vnd.openxmlformats-officedocument.wordprocessingml.document': word,
-    'application/vnd.oasis.opendocument.text': word,
     // Images
     'image/apng': image,
     'image/png': image,
@@ -59,7 +57,6 @@ export const defaultRenderers: Record<string, RendererFunction> = {
     'application/vnd.ms-excel': spreadsheet,
     'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet': spreadsheet,
     'application/vnd.oasis.opendocument.spreadsheet': spreadsheet,
-    'application/vnd.oasis.opendocument.spreadsheet-template': spreadsheet,
     // ZIP
     'application/zip': zip,
     'application/x-zip-compressed': zip,
