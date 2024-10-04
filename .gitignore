@@ -111,3 +111,8 @@ dist
 
 # public
 public
+
+#lib
+!src/lib/types.d.ts
+!src/lib/types/canvas-datagrid.d.ts
+*.d.ts
