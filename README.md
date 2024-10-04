@@ -2,42 +2,43 @@
 `react-doc-render` is a lightweight React library designed for rendering documents of various popular MIME types directly in the browser. The library supports formats such as PDF, images (JPEG, PNG, GIF, SVG, BMP, TIFF), text files (plain text, HTML, XML, CSV, JSON), Microsoft Office documents (Word, Excel), audio files (MP3, WAV, OGG, AAC), video files (MP4, WebM, OGG, AVI, QuickTime, MPEG, WMV), and ZIP archives. It provides a simple and unified interface to handle different content types.
 
 ## Supported MIME types
-| MIME type                                                                                      | Passed |
-|------------------------------------------------------------------------------------------------|--------|
-| application/vnd.openxmlformats-officedocument.wordprocessingml.document                        | ✅     |
-| image/apng                                                                                     | ✅     |
-| image/png                                                                                      | ✅     |
-| image/jpeg                                                                                     | ✅     |
-| image/gif                                                                                      | ✅     |
-| image/bmp                                                                                      | ✅     |
-| image/svg+xml                                                                                  | ✅     |
-| image/tif                                                                                      | ✅     |
-| image/tiff                                                                                     | ✅     |
-| text/plain                                                                                     | ✅     |
-| application/xml                                                                                | ✅     |
-| text/xml                                                                                       | ✅     |
-| application/json                                                                               | ✅     |
-| text/csv                                                                                       | ✅     |
-| text/html                                                                                      | ✅     |
-| application/pdf                                                                                | ✅     |
-| application/vnd.ms-excel                                                                       | ✅     |
-| application/vnd.openxmlformats-officedocument.spreadsheetml.sheet                              | ✅     |
-| application/vnd.oasis.opendocument.spreadsheet                                                 | ✅     |
-| application/zip                                                                                | ✅     |
-| application/x-zip-compressed                                                                   | ✅     |
-| video/mp4                                                                                      | ✅     |
-| video/webm                                                                                     | ✅     |
-| video/ogg                                                                                      | ✅     |
-| video/x-msvideo                                                                                | ✅     |
-| video/quicktime                                                                                | ✅     |
-| video/mpeg                                                                                     | ✅     |
-| video/x-ms-wmv                                                                                 | ✅     |
-| audio/mpeg                                                                                     | ✅     |
-| audio/wav                                                                                      | ✅     |
-| audio/ogg                                                                                      | ✅     |
-| audio/mp4                                                                                      | ✅     |
-| audio/aac                                                                                      | ✅     |
-| audio/x-wav                                                                                    | ✅     |
+
+| Extension   | MIME type                                                                | Passed |
+|-------------|--------------------------------------------------------------------------|--------|
+| .docx       | application/vnd.openxmlformats-officedocument.wordprocessingml.document  | ✅     |
+| .apng       | image/apng                                                               | ✅     |
+| .png        | image/png                                                                | ✅     |
+| .jpeg, .jpg | image/jpeg                                                               | ✅     |
+| .gif        | image/gif                                                                | ✅     |
+| .bmp        | image/bmp                                                                | ✅     |
+| .svg        | image/svg+xml                                                            | ✅     |
+| .tif        | image/tif                                                                | ✅     |
+| .tiff       | image/tiff                                                               | ✅     |
+| .txt        | text/plain                                                               | ✅     |
+| .xml        | application/xml                                                          | ✅     |
+| .xml        | text/xml                                                                 | ✅     |
+| .json       | application/json                                                         | ✅     |
+| .csv        | text/csv                                                                 | ✅     |
+| .html       | text/html                                                                | ✅     |
+| .pdf        | application/pdf                                                          | ✅     |
+| .xls        | application/vnd.ms-excel                                                 | ✅     |
+| .xlsx       | application/vnd.openxmlformats-officedocument.spreadsheetml.sheet        | ✅     |
+| .ods        | application/vnd.oasis.opendocument.spreadsheet                           | ✅     |
+| .zip        | application/zip                                                          | ✅     |
+| .zip        | application/x-zip-compressed                                             | ✅     |
+| .mp4        | video/mp4                                                                | ✅     |
+| .webm       | video/webm                                                               | ✅     |
+| .ogg        | video/ogg                                                                | ✅     |
+| .avi        | video/x-msvideo                                                          | ✅     |
+| .mov        | video/quicktime                                                          | ✅     |
+| .mpeg, .mpg | video/mpeg                                                               | ✅     |
+| .wmv        | video/x-ms-wmv                                                           | ✅     |
+| .mp3        | audio/mpeg                                                               | ✅     |
+| .wav        | audio/wav                                                                | ✅     |
+| .ogg        | audio/ogg                                                                | ✅     |
+| .mp4        | audio/mp4                                                                | ✅     |
+| .aac        | audio/aac                                                                | ✅     |
+| .wav        | audio/x-wav                                                              | ✅     |
 
 
 MIME types are obtained through a separate request for the `Content-Type` header. You can pass the MIME type and file size directly to reduce the number of requests. This approach streamlines the process and enhances efficiency when handling various file types within the library.
