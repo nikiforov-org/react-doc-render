@@ -72,7 +72,7 @@ const DocRender: React.FC<DocRenderProps> = ({
                 if (mimeType && LIMIT[mimeType as keyof typeof LIMIT]) {
                     const maxSize = LIMIT[mimeType as keyof typeof LIMIT];
                     if (fileSize > maxSize) {
-                        setMessageText(`${messages.file_size_exceeds_the_limit} (${formatFileSize(maxSize)} bytes)`);
+                        setMessageText(`${messages.file_size_exceeds_the_limit} (${formatFileSize(maxSize)}`);
                         setMessageType('error');
                         setHasError(true);
                         return;
