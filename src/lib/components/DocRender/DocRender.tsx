@@ -1,4 +1,3 @@
-// src/lib/components/DocRender/DocRender.tsx
 import React, { useEffect, useState, useRef } from 'react';
 import './DocRender.scss';
 import { DefaultLoading, defaultMessage, defaultRenderers } from './DocRender.config';
@@ -63,10 +62,11 @@ const DocRender: React.FC<DocRenderProps> = ({
                     mimeType = headResponse.headers.get('Content-Type')?.split(';')[0].toLowerCase().trim();
                 }
 
-                if (!mimeType) {
-                    setMessageText(messages.unable_to_detect_the_files_mime_type);
+                if (mimeType && !RENDERERS[mimeType as keyof typeof RENDERERS]) {
+                    setMessageText(`${messages.unsupported_file_format} (${mimeType})`);
                     setMessageType('error');
                     setHasError(true);
+                    return;
                 }
 
                 if (mimeType && LIMIT[mimeType as keyof typeof LIMIT]) {
@@ -91,13 +91,7 @@ const DocRender: React.FC<DocRenderProps> = ({
                     const renderer = RENDERERS[mimeType as keyof typeof RENDERERS];
                     if (typeof renderer === 'function') {
                         await renderer(arrayBuffer, setContent, mimeType);
-                    } else {
-                        setMessageText(`${messages.unsupported_file_format} (${mimeType})`);
-                        setMessageType('error');
-                        setHasError(true);
                     }
-                } else {
-                    setHasError(true);
                 }
 
                 hasFetched.current = true;

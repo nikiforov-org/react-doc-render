@@ -9,6 +9,7 @@ const CustomLoading: React.FC = () => {
 
 const customMessage: MessageFunction = (text, type) => {
     console.log(`${type}: ${text}`);
+    alert(`${type}: ${text}`);
 };
 
 const myCustomYmlRenderer: RendererFunction = async (buffer, setContent, mimeType) => {
@@ -41,7 +42,11 @@ const App = () => {
     return (
         <>
             <DocRender
-                uri="./files/mov.mov"
+                //uri="./files/mov.mov"
+                uri="https://filesampleshub.com/download/archive/rar/sample1.rar"
+                mime="application/vnd.rar"
+                size={8853}
+            //message={customMessage}
             //uri="./files/xlsx.xlsx"
             //uri="./files/zip.zip"
             //uri="./files/html.html"

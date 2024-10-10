@@ -76,14 +76,115 @@ The `DocRender` component accepts the following configuration options:
 | message        | `MessageFunction`         |   no     | `<MessageComponent text={text} type={type} />`                        | Returns a service message, e.g., firing a toast or rendering a component.|
 | renderers      | `RendererFunction`        |   no     | Library renderers                                                     | Custom rendering functions for handling specific MIME types.   |
 | mime           | `string`                  |   no     |    `null`                                                               | To specify the MIME type directly.                             |
-| size           | `number`                  |   no     |    `null`                                                               | To specify the file size directly.                             |
+| size           | `number`                  |   no     |    `null`                                                               | To specify the file size in bytes directly.                             |
 | limit          | `{[key: string]: number}` |   no     | `{"application/zip": 1048576, "application/x-zip-compressed": 1048576}` | Limit for rendering the file MIME type in bytes.           |
 | i18n           | `[languageCode: string]: {[key: string]: string;}`|   no     |    Translated messages                                                               | Translated service messages.                             |
 | lang           | `en \| ru \| es \| zh \| ar \| fr`|   no     |    `'en'`                                                               | Language of service messages.                             |
 | ...otherProps  | `any`                     |   no     |    `null`                                       | You can pass any additional props that you want.               |
 
-## Example of usage
+## Examples of usage
 
+### Custom Loading component.
+```tsx
+import React from 'react';
+import { DocRender } from "react-doc-render";
+
+const CustomLoadingComponent: React.FC = () => {
+    return <>Custom loading...</>;
+};
+
+const App = () => {
+    return (
+        <>
+            <DocRender
+                uri="https://example.com/files/example.docx"
+                loading={CustomLoadingComponent}
+            />
+        </>
+    );
+};
+
+export default App;
+```
+
+### Message function for displaying a message instead of rendering the default component. It can be used, for example, for displaying alerts and toasts.
+```tsx
+import React from 'react';
+import { DocRender } from "react-doc-render";
+import { MessageFunction } from 'react-doc-render/dist/types';
+
+const customMessage: MessageFunction = (text, type) => {
+    console.log(`${type}: ${text}`);
+    alert(`${type}: ${text}`);
+};
+
+const App = () => {
+    return (
+        <>
+            <DocRender
+                uri="https://example.com/files/example.docx"
+                message={customMessage}
+            />
+        </>
+    );
+};
+
+export default App;
+```
+
+### Custom renderers functions. Predefined renderers can be replaced or new ones can be added.
+```tsx
+import React from 'react';
+import { DocRender } from "react-doc-render";
+import { RendererFunction } from 'react-doc-render/dist/types';
+
+const myCustomYmlRendererFunction: RendererFunction = async (buffer, setContent, mimeType) => {
+    const text = new TextDecoder().decode(buffer);
+    const content = `<p>Output from my custom ${mimeType}-renderer:</p><pre>${text}</pre>`;
+    const html = `<div id="rdr-content" class="rdr-content-myCustomYmlRendererFunction">${content}</div>`;
+    const callback = () => console.log(`${mimeType}-file was successfully rendered`);
+    setContent({ html, callback });
+};
+
+const customRenderers = {
+    'text/yaml': myCustomYmlRendererFunction,
+};
+
+const App = () => {
+    return (
+        <>
+            <DocRender
+                uri="./docker-compose.yml"
+                renderers={customRenderers}
+            />
+        </>
+    );
+};
+
+export default App;
+```
+
+### If the file size and MIME type are known, they can be specified directly to avoid additional header requests to the server. For this, both parameters must be applied simultaneously.
+```tsx
+import React from 'react';
+import { DocRender } from "react-doc-render";
+
+const App = () => {
+    return (
+        <>
+            <DocRender
+                uri="https://example.com/files/example.docx"
+                mime="application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+                size={17299}
+            />
+        </>
+    );
+};
+
+export default App;
+```
+
+### A limit can be added for file MIME type requests.
 ```tsx
 import React from 'react';
 import { DocRender } from "react-doc-render";
@@ -92,6 +193,25 @@ const limit = {
     "application/zip": 5242880,
     "application/x-zip-compressed": 5242880
 }
+
+const App = () => {
+    return (
+        <>
+            <DocRender
+                uri="https://example.com/files/example.zip"
+                limit={limit}
+            />
+        </>
+    );
+};
+
+export default App;
+```
+
+### Internationalization. You can modify the default messages for predefined languages, as well as add support for other languages. Additionally, you can force a language for the messages.
+```tsx
+import React from 'react';
+import { DocRender } from "react-doc-render";
 
 const i18n = {
     "de": {
@@ -102,37 +222,32 @@ const i18n = {
     }
 };
 
-const CustomLoadingComponent: React.FC = () => {
-    return <>Custom loading...</>;
+const App = () => {
+    return (
+        <>
+            <DocRender
+                uri="https://example.com/files/example.docx"
+                i18n={i18n}
+                lang="de"
+            />
+        </>
+    );
 };
 
-const customMessage: MessageFunction = (text, type) => {
-    console.log(`${type}: ${text}`);
-};
+export default App;
+```
 
-const myCustomYmlRenderer: RendererFunction = async (buffer, setContent, mimeType) => {
-    const text = new TextDecoder().decode(buffer);
-    const content = `<p>Output from my custom ${mimeType}-renderer:</p><pre>${text}</pre>`;
-    const html = `<div id="rdr-content" class="rdr-content-customRenderer">${content}</div>`;
-    const callback = () => console.log(`${mimeType}-file was successfully rendered`);
-    setContent({ html, callback });
-};
+### Styling. Inside each renderer, there is a wrapper for the content with the ID `#rdr-content` and the CSS class `.rdr-content-${name}` available 'out of the box'. You can also assign classes and styles to the component itself.
 
-const customRenderers = {
-    'yml': myCustomYmlRendererFunction,
-};
+```tsx
+import React from 'react';
+import { DocRender } from "react-doc-render";
 
 const App = () => {
     return (
         <>
             <DocRender
-                uri="./docker-compose.yml"
-                loading={CustomLoadingComponent}
-                message={customMessage}
-                renderers={customRenderers}
-                limit={limit}
-                lang="ge"
-                i18n={i18n}
+                uri="https://example.com/files/example.docx"
                 className="mx-auto"
                 style={{ position: 'absolute' }}
             />
@@ -141,5 +256,4 @@ const App = () => {
 };
 
 export default App;
-
 ```
