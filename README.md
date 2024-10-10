@@ -85,6 +85,7 @@ The `DocRender` component accepts the following configuration options:
 ## Examples of usage
 
 ### Custom Loading component.
+You can display a custom loading component instead of the predefined one.
 ```tsx
 import React from 'react';
 import { DocRender } from "react-doc-render";
@@ -107,7 +108,8 @@ const App = () => {
 export default App;
 ```
 
-### Message function for displaying a message instead of rendering the default component. It can be used, for example, for displaying alerts and toasts.
+### Message function 
+`message` attribute is for displaying a message instead of rendering the default component. It can be used, for example, for displaying alerts and toasts.
 ```tsx
 import React from 'react';
 import { DocRender } from "react-doc-render";
@@ -132,7 +134,8 @@ const App = () => {
 export default App;
 ```
 
-### Custom renderers functions. Predefined renderers can be replaced or new ones can be added.
+### Custom renderers functions. 
+Predefined renderers can be replaced or new ones can be added.
 ```tsx
 import React from 'react';
 import { DocRender } from "react-doc-render";
@@ -164,7 +167,8 @@ const App = () => {
 export default App;
 ```
 
-### If the file size and MIME type are known, they can be specified directly to avoid additional header requests to the server. For this, both parameters must be applied simultaneously.
+### Pass MIME type and file size directly.
+If the file size and MIME type are known, they can be specified directly to avoid additional `HEAD` requests to the server. For this, both parameters must be applied simultaneously.
 ```tsx
 import React from 'react';
 import { DocRender } from "react-doc-render";
@@ -184,7 +188,8 @@ const App = () => {
 export default App;
 ```
 
-### A limit can be added for file MIME type requests.
+### Limit
+A limit can be added for file MIME type requests.
 ```tsx
 import React from 'react';
 import { DocRender } from "react-doc-render";
@@ -208,7 +213,8 @@ const App = () => {
 export default App;
 ```
 
-### Internationalization. You can modify the default messages for predefined languages, as well as add support for other languages. Additionally, you can force a language for the messages.
+### Internationalization. 
+You can modify the default messages for predefined languages, as well as add support for other languages. Additionally, you can force a language for the messages.
 ```tsx
 import React from 'react';
 import { DocRender } from "react-doc-render";
@@ -237,7 +243,8 @@ const App = () => {
 export default App;
 ```
 
-### Styling. Inside each renderer, there is a wrapper for the content with the ID `#rdr-content` and the CSS class `.rdr-content-${name}` available 'out of the box'. You can also assign classes and styles to the component itself.
+### Styling. 
+Inside each renderer, there is a wrapper for the content with the ID `#rdr-content` and the CSS class `.rdr-content-${name}` available 'out of the box'. You can also assign classes and styles to the component itself.
 
 ```tsx
 import React from 'react';
